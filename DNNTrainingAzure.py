@@ -27,8 +27,8 @@ hidden_nodes_5 = int(hidden_nodes_1 * np.power(0.5, 4))
 beta=0.001
 n_classes = 2
 batch_size = 100
-hm_epochs = 5
-batch_count = 300000
+hm_epochs =2
+batch_count = 500
 display_step = 1
 
 
@@ -212,7 +212,7 @@ def trainDNN(train_file='lexikon2.pickle', csv_file='train_converted_vermischt.c
                     if zaehler >= batch_count:
                         break
 
-                    if (zaehler % 500 == 0):
+                    if (zaehler % 100 == 0):
                         print("Minibatch loss at step {}: {}".format(zaehler, c))
                         #print("Minibatch accuracy: {:.9f}".format(accuracy.eval(
                             #{tf_train_dataset: train_dataset, tf_train_labels: train_labels, keep_prob: 0.5})))
