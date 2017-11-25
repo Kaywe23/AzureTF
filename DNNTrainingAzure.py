@@ -5,7 +5,7 @@ from tensorflow.python.lib.io import file_io
 import argparse
 from nltk.tokenize import word_tokenize
 import nltk
-
+import math as math
 nltk.download('punkt')
 nltk.download('wordnet')
 from nltk.stem import WordNetLemmatizer
