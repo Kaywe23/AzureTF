@@ -224,7 +224,7 @@ def trainDNN(train_file='lexikon2.pickle', csv_file='train_converted_vermischt.c
             if epoch % display_step == 0:
                 print "Epoche:", '%04d' % (epoch + 1), "of", '%04d' % (hm_epochs), "average cost=", "{:.9f}".format(avg_cost)
 
-            with open(tf_log, 'a') as f:
+            with tf.gfile.Open(logs, 'a') as f:
                 f.write(str(epoch) + '\n')
 
 
