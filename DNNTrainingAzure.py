@@ -169,7 +169,7 @@ def trainDNN(train_file='lexikon2.pickle', csv_file='train_converted_vermischt.c
 
     with tf.Session(graph=graph) as sess:
         tf.global_variables_initializer().run()
-        summary_writer = tf.summary.FileWriter(job_dir, graph=graph)
+        writer = tf.summary.FileWriter(job_dir, graph=graph)
         print('Start Training')
         try:
             epoch = int(tf.gfile.Open(logs, 'r').read().split('\n')[-2]) + 1
