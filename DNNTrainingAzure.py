@@ -13,6 +13,7 @@ import io
 import csv
 import pandas as pd
 import sys
+from time import *
 
 reload(sys)
 sys.setdefaultencoding('latin-1')
@@ -25,8 +26,8 @@ hidden_nodes_2 = int(hidden_nodes_1 * 0.5)
 beta=0.001
 n_classes = 2
 batch_size = 100
-hm_epochs =2
-batch_count = 500
+hm_epochs = 1
+batch_count = 100
 display_step = 1
 
 
@@ -47,7 +48,7 @@ with graph.as_default():
         biases_2 = tf.Variable(tf.random_normal([hidden_nodes_2]))
         biases_3 = tf.Variable(tf.random_normal([n_classes]))
 
-    with tf.name_scope('deep neural net'):
+    with tf.name_scope('deep_neural_net'):
 
         # Hidden RELU layer 1
         logits_1 = tf.matmul(tf_train_dataset, weights_1) + biases_1
@@ -78,7 +79,7 @@ with graph.as_default():
 
     with tf.name_scope('train'):
         # Gradient Descent
-        #optimizer = tf.train.AdamOptimizer(learning_rate=0.0001).minimize(cost)
+        # optimizer = tf.train.AdamOptimizer(learning_rate=0.0001).minimize(cost)
         # Decaying learning rate
         global_step = tf.Variable(0)  # count the number of steps taken.
         start_learning_rate = 0.001
@@ -103,7 +104,7 @@ with graph.as_default():
 
 
 def trainDNN(train_file='lexikon2.pickle', csv_file='train_converted_vermischt.csv',
-             csv_file2='vector_test_converted.csv', job_dir='./DNNTrainingAzure',
+             csv_file2='vector_test_converted.csv', job_dir='./tmp/DNNTrainingAzure',
              checkpoint='model.ckpt', logs='tf.log', **args):
     file_stream = file_io.FileIO(train_file, mode='r')
     lexikon = pickle.load(file_stream)
@@ -132,7 +133,7 @@ def trainDNN(train_file='lexikon2.pickle', csv_file='train_converted_vermischt.c
         tf.global_variables_initializer().run()
         print("Initialized")
 
-        writer = tf.summary.FileWriter(logs_path, graph=graph)
+        writer = tf.summary.FileWriter(job_dir, graph=graph)
         print('Start Training')
 
         #try:
